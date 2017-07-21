@@ -1,12 +1,12 @@
-var cardArray = []
-var cardList = $('.idea-card-parent')
+var cardArray = [];
+var cardList = $('.idea-card-parent');
 
 function CardElements(title, body) {
   this.title = title;
   this.body = body;
   this.id = Date.now();
   this.quality = 'swill';
-};
+}
 
 $(window).on('load', function() {
   retrieveLocalStorage();
@@ -20,30 +20,30 @@ $('.title-input, .body-input').keyup(function() {
 });
 
 $('.idea-card-parent').on('click', '#delete', function() {
-  var currentCardId = $(this).closest('.idea-card')[0].id
+  var currentCardId = $(this).closest('.idea-card')[0].id;
   cardArray.forEach(function(card, index) {
     if (currentCardId == card.id) {
-      cardArray.splice(index, 1)
+      cardArray.splice(index, 1);
     }
-  })
-  storeCards()
-  $(this).parents('.idea-card').remove()
+  });
+  storeCards();
+  $(this).parents('.idea-card').remove();
 });
 
 $('.idea-card-parent').on('click', '#upvote', function(event) {
   event.preventDefault();
-  var cardId = $(this).closest('.idea-card')[0].id
+  var cardId = $(this).closest('.idea-card')[0].id;
   cardArray.forEach(function(card) {
     if (card.id == cardId) {
       if (card.quality === "swill") {
         card.quality = "plausible";
-        $('.' + cardId).text('plausible')
+        $('.' + cardId).text('plausible');
       } else if (card.quality === "plausible") {
-        card.quality = "genius"
-        $('.' + cardId).text('genius')
+        card.quality = "genius";
+        $('.' + cardId).text('genius');
       } else {
-        card.quality = "genius"
-        $('.' + cardId).text('genius')
+        card.quality = "genius";
+        $('.' + cardId).text('genius');
       }
     }
     storeCards();
@@ -102,11 +102,11 @@ cardList.on('keyup', '.body-text', function(event) {
     if (card.id == id) {
       card.body = body;
     }
-  })
+  });
   storeCards();
 });
 
-$('.search-input').on('keyup', searchCards)
+$('.search-input').on('keyup', searchCards);
 
 function searchCards() {
   var search = $(this).val().toUpperCase();
@@ -119,7 +119,7 @@ function searchCards() {
   for (var i = 0; i < results.length; i++) {
     addCards(results[i]);
   }
-};
+}
 
 function addCards(buildCard) {
   $('.idea-card-parent').prepend(
@@ -135,30 +135,30 @@ function addCards(buildCard) {
       </div>
       <hr>
     </article>`);
-};
+}
 
 function fireCards() {
   var newCard = new CardElements($('.title-input').val(), $('.body-input').val());
-  cardArray.push(newCard)
+  cardArray.push(newCard);
   addCards(newCard);
   storeCards();
   clearInputs();
-};
+}
 
 function storeCards() {
   localStorage.setItem('array', JSON.stringify(cardArray));
-  clearInputs()
-};
+  clearInputs();
+}
 
 function clearInputs() {
   $('.title-input').val('');
   $('.body-input').val('');
   $('title-input').focus();
-};
+}
 
 function retrieveLocalStorage() {
   cardArray = JSON.parse(localStorage.getItem('array')) || [];
   cardArray.forEach(function(card) {
     addCards(card);
-  })
-};
+  });
+}
