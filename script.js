@@ -30,7 +30,9 @@ $('.idea-card-parent').on('click', '#delete', function() {
   $(this).parents('.idea-card').remove();
 });
 
-$('.idea-card-parent').on('click', '#upvote', function(event) {
+$('.idea-card-parent').on('click', '#upvote', upVote);
+
+function upVote(event) {
   event.preventDefault();
   var cardId = $(this).closest('.idea-card')[0].id;
   cardArray.forEach(function(card) {
@@ -48,7 +50,7 @@ $('.idea-card-parent').on('click', '#upvote', function(event) {
     }
     storeCards();
   })
-});
+}
 
 $('.idea-card-parent').on('click', '#downvote', function (event){
   event.preventDefault();
