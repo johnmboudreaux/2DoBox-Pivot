@@ -1,34 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="reset.css" type="text/css">
-    <link rel="stylesheet" href="style.css" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700" rel="stylesheet">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="path/to/your/jquery.min.js"><\/script>')</script>
-    <title>Francy and Ben Idea Box</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
-  <body>
-    <section class="top-section">
-      <header>
-        <h1><span class="idea">idea</span><span class="box">box</span></h1>
-      </header>
-      <form class="input-fields">
-        <input class="title-input" type="text" placeholder="Title" />
-        <input class="body-input" type="text" placeholder="Body" />
-        <input class="save-btn" type="submit" value="save" disabled />
-      </form>
-    </section>
-    <section class="search-section">
-      <input class="search-input" type="text" placeholder="Search">
-    </section>
-    <section class="idea-card-parent">
-      <article class="idea-card">
-      </article>
-    </section>
-    <script type="text/javascript" src="script.js" type="text/js"></script>
-  </body>
+
+<head>
+  <title>2DoBox</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles/vendor/reset.css" type="text/css">
+  <link rel="stylesheet" href="styles/fonts.css">
+  <link rel="stylesheet" href="styles/style.css" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700" rel="stylesheet">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script>
+    window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')
+  </script>
+</head>
+
+<body>
+
+  <section class="top-section">
+    <header>
+      <h1 class="header-title"><span class="idea">idea</span><span class="box">box</span></h1>
+    </header>
+
+    <form class="input-fields">
+      <input class="title-input" type="text" placeholder="Title" />
+      <input class="body-input" type="text" placeholder="Body" />
+      <input class="save-btn" type="submit" value="save" disabled />
+    </form>
+
+  </section>
+  <section class="search-section">
+    <input class="search-input" type="text" placeholder="Search">
+  </section>
+
+  <section class="idea-card-parent">
+    <article class="idea-card"></article>
+  </section>
+
+  <script src="js/script.js"></script>
+</body>
+
 </html>

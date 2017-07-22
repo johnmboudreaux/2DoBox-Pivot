@@ -2,26 +2,25 @@ body {
   font-family: 'open sans', sans-serif;
   font-weight: 400;
 }
-p{
-  line-height: 140%;
-}
+
 .top-section {
   background-color: #E5F3F2;
 }
-h1 {
-  font-family: 'roboto slab', sans-serif;
-  font-weight: 700;
+
+.header-title {
   text-align: center;
-  font-size: 3em;
   padding-top: .75em;
   margin-bottom: .75em;
 }
+
 .idea {
   color: #00A79D;
 }
+
 .box {
   color: #6D6E71;
 }
+
 .title-input,
 .body-input,
 .save-btn,
@@ -44,18 +43,21 @@ h1 {
   padding-top: .75em;
   font-size: 1.75em;
 }
+
 ::-moz-placeholder { /* Firefox 19+ */
   color: #d1d3d4;
   padding-left: .75em;
   font-size: .5em;
   padding-top: .75em;
 }
+
 :-ms-input-placeholder { /* IE 10+ */
   color: #d1d3d4;
   padding-left: .75em;
   font-size: .5em;
   padding-top: .75em;
 }
+
 :-moz-placeholder { /* Firefox 18- */
   color: #d1d3d4;
   padding-left: .75em;
@@ -67,18 +69,22 @@ h1 {
   outline-style: auto;
   outline-color: #00A79D;
 }
+
 .body-input:focus {
   outline-style: auto;
   outline-color: #00A79D;
 }
+
 .save-btn:focus {
   outline-style: auto;
   outline-color: #00A79D;
 }
+
 .search-input:focus {
   outline-style: auto;
   outline-color: #00A79D;
 }
+
 .save-btn {
   background-color: #00A79D;
   color: #FFFFFF;
@@ -92,27 +98,30 @@ h1 {
 .save-btn:disabled {
   background-color: #D1D3D4;
 }
+
 .input-fields {
   padding-bottom: .15em;
 }
+
 .search-section {
   margin-top: 1.75em;
   margin-bottom: 1.75em;
 }
+
 .search-input,
 .title-input,
 .body-input{
   border: 4px solid ##d1d3d4;
 }
-h2 {
-  color: #6D6E71;
-}
+
 .body {
   text-align: left;
 }
+
 .body-text{
   color: #939598
 }
+
 .quality {
   color: #6D6E71;
   margin-left: 1.2em;
@@ -120,73 +129,80 @@ h2 {
   font-family: 'roboto slab', sans-serif;
   letter-spacing: .04em;
 }
+
 .idea-card {
   width: 66%;
   margin: auto;
 }
-h2 {
-  font-size: 1.5em;
-  font-family: 'roboto slab', sans-serif;
-  display: inline-block;
-}
+
 hr {
   color:#D1D3D4;
   margin-top: .75em;
 }
+
 .upvote-btn,
 .downvote-btn,
 .quality-div,
 .quality{
   display: inline-block;
 }
+
 .quality-div{
   margin: 0 0 .25em .75em
 }
+
 .delete-btn{
   height: 1.5em;
   width: 1.5em;
   float: right;
   display: inline-block;
-  background-image: url(ideabox-assets/delete.svg)
+  background-image: url(../images/delete.svg)
 }
+
 #delete,
 #upvote,
 #downvote {
   height: 1.5em;
   width: 1.5em;
 }
+
 #delete:hover {
-  background-image: url(ideabox-assets/delete-hover.svg);
+  background-image: url(../images/delete-hover.svg);
 }
+
 #upvote {
     height: 1.5em;
     width: 1.5em;
     display: inline-block;
-    background-image: url(ideabox-assets/upvote.svg)
+    background-image: url(../images/upvote.svg)
 }
+
 #upvote:hover {
-  background-image: url(ideabox-assets/upvote-hover.svg)
+  background-image: url(../images/upvote-hover.svg)
 }
+
 #downvote {
   margin-left: .75em;
   height: 1.5em;
   width: 1.5em;
   display: inline-block;
-  background-image: url(ideabox-assets/downvote.svg)
+  background-image: url(../images/downvote.svg)
 }
+
 #downvote:hover {
-  background-image: url(ideabox-assets/downvote-hover.svg)
+  background-image: url(../images/downvote-hover.svg)
 }
 
  .ratings{
    display: flex;
    align-content: center;
  }
-h2,
+
 .ratings,
 .body-text {
   margin: .25em 0 1em 0;
 }
+
 @media (max-width: 450px) {
     .body-input{
     padding-top: 0;
