@@ -119,6 +119,7 @@ $(document).ready(function() {
       <div class="downvote-btn" id="downvote"></div>
         <p class="quality">quality: <span class="${buildCard.id}">${importanceArray[buildCard.importance]}</span></p>
       </div>
+      <p class="clear">Completed</p>
       <hr>
     </article>`);
   }
