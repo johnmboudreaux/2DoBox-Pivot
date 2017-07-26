@@ -13,7 +13,7 @@ body {
   margin-bottom: .75em;
 }
 
-.idea {
+.todo {
   color: #00A79D;
 }
 
@@ -130,7 +130,7 @@ body {
   letter-spacing: .04em;
 }
 
-.idea-card {
+.todo-card {
   width: 66%;
   margin: auto;
 }
