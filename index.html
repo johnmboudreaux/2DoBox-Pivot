@@ -1,44 +1,38 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <title>2DoBox</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles/vendor/reset.css" type="text/css">
-  <link rel="stylesheet" href="styles/fonts.css">
-  <link rel="stylesheet" href="styles/style.css" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700" rel="stylesheet">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script>
-    window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')
-  </script>
-</head>
-
-<body>
-
-  <section class="top-section">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles/vendor/reset.css" type="text/css">
+    <link rel="stylesheet" href="styles/style.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:700" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <title>2doBox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
     <header>
-      <h1 class="header-title"><span class="todo">idea</span><span class="box">box</span></h1>
+      <img class="logo" src="images/todo-logo.svg" alt="todo-logo"/>
+      <input class="title-input" type="text" placeholder="Title"/>
+      <input class="body-input" type="text" placeholder="Body" />
+      <input class="save-btn" type="submit" value="save"/>
     </header>
 
-    <form class="input-fields">
-      <input class="title-input" type="text" placeholder="Title" />
-      <input class="body-input" type="text" placeholder="Body" />
-      <input class="save-btn" type="submit" value="save" disabled />
-    </form>
+    <section class="search-section">
+      <input class="search-input" type="text" placeholder="Search">
+      <div class="filter-container">
+        <button class="importance-button">critical</button>
+        <button class="importance-button">high</button>
+        <button class="importance-button">normal</button>
+        <button class="importance-button">low</button>
+        <button class="importance-button">none</button>
+        <button class="clear-filter-btn">clear filters</button>
+      </div>
+    </section>
 
-  </section>
-  <section class="search-section">
-    <input class="search-input" type="text" placeholder="Search">
-  </section>
-
-  <section class="todo-card-parent">
-    <article class="todo-card"></article>
-  </section>
-
-  <script src="js/script.js"></script>
-</body>
-
+    <section class="todo-card-parent">
+      <article class="todo-card">
+      </article>
+    <script type="text/javascript" src="js/script.js" type="text/js"></script>
+  </body>
 </html>
