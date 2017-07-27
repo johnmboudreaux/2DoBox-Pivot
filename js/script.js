@@ -7,40 +7,42 @@ $(document).ready(function() {
     this.importance = importance;
   }
 
-  function eventListeners() {
-    //refactor variables
-    var $cardList = $('.todo-card-parent');
-    var $saveBtn = $('.save-btn');
-    var $titleInput = $('.title-input');
-    var $bodyInput = $('.body-input');
-    var $toDoParent = $('.todo-card-parent');
-    var $searchInput = $('.search-input');
-    $saveBtn.on('click', saveButton);
-    $titleInput.keyup(enableSaveButton);
-    $bodyInput.keyup(enableSaveButton);
-    $toDoParent.on('click', '#delete', deleteCard);
-    $toDoParent.on('click', '#downvote', changeImportance);
-    $toDoParent.on('click', '#upvote', changeImportance);
-    $cardList.on('blur', 'h2', editCardText);
-    $cardList.on('keyup', 'h2', blurEdit);
-    $cardList.on('blur', '.body-text', editCardText);
-    $cardList.on('keyup', '.body-text', blurEdit);
-    $searchInput.on('keyup', searchCards);
-  }
+  $('.save-btn').on('click', saveButton);
+  $('.title-input').keyup(enableSaveButton);
+  $('.task-input').keyup(enableSaveButton);
+  $('.todo-card-parent').on('click', '#delete', deleteCard);
+  $('.todo-card-parent').on('click', '#downvote', changeImportance);
+  $('.todo-card-parent').on('click', '#upvote', changeImportance);
+  $('.todo-card-parent').on('blur', 'h2', editCardText);
+  $('.todo-card-parent').on('keyup', 'h2', blurEdit);
+  $('.todo-card-parent').on('blur', '.body-text', editCardText);
+  $('.todo-card-parent').on('keyup', '.body-text', blurEdit);
+  $('.search-input').on('keyup', searchCards);
+  // $('.importance-button0').on('click', filterImportance);
+  // $('.importance-button1').on('click', filterImportance);
+  // $('.importance-button2').on('click', filterImportance);
+  // $('.importance-button3').on('click', filterImportance);
+  // $('.importance-button4').on('click', filterImportance);
 
   retrieveLocalStorage();
-  eventListeners();
 
-  function saveButton(event) {
-    event.preventDefault();
+  function saveButton(e) {
+    e.preventDefault();
     fireCards();
-    $('.save-btn').attr('disabled', 'disabled');
+    toggledButtonDisabledness()
   }
 
   function enableSaveButton() {
-    if (($('.title-input').val() !== "") || ($('.body-input').val() !== "")) {
-      $('.save-btn').removeAttr('disabled');
+    if (($('.title-input').val() !== "") && ($('.task-input').val() !== "")) {
+      // $('.save-btn').removeAttr('disabled');
+      toggledButtonDisabledness()
     }
+  }
+
+  function toggledButtonDisabledness(){
+    var checkForValues = ($('.title-input').val() !== "") || ($('.task-input').val() !== "")
+    console.log(checkForValues);
+    $('.save-btn').attr('disabled', !checkForValues);
   }
 
   function deleteCard() {
@@ -55,19 +57,21 @@ $(document).ready(function() {
     $(this).parents('.todo-card').remove();
   }
 
-  function changeImportance(event) {
-    event.preventDefault();
+  function changeImportance(e) {
+    e.preventDefault();
     var importanceArray = ['none', 'low', 'normal', 'high', 'critical'];
     var cardId = $(this).closest('.todo-card')[0].id;
     var cardArray = retrieveCards();
     cardArray.forEach(function(card) {
       if ($(event.target).hasClass('upvote-btn') && card.id == cardId && card.importance < 4) {
         card.importance++;
+        $('.' + cardId).text(importanceArray[card.importance]);
+        storeCards(cardArray);
       } else if ($(event.target).hasClass('downvote-btn') && card.id == cardId && card.importance > 0) {
         card.importance--;
+        $('.' + cardId).text(importanceArray[card.importance]);
+        storeCards(cardArray);
       }
-      $('.' + cardId).text(importanceArray[card.importance]);
-      storeCards(cardArray);
     });
   }
 
@@ -85,6 +89,26 @@ $(document).ready(function() {
     storeCards(cardArray);
   }
 
+
+
+  // function filterImportance() {
+  //   console.log($(this));
+  //   var importanceArray = ['none', 'low', 'normal', 'high', 'critical'];
+  //   var cardArray = retrieveCards();
+  //   console.log(cardArray);
+  //   console.log(event.target);
+  //   //go through array by index and find cards that match index of importance
+  //   var results = cardArray.filter(function(elementcard) {
+  //     console.log(elementcard);
+  //     console.log(elementcard.importance);
+  //     console.log(importanceArray);
+  //      if (elementcard.importance == importanceArray[0]) {
+  //        console.log('working');
+  //        return elementcard;
+  //     }
+  // });
+  // }
+
   function blurEdit(e) {
     if (e.keyCode === 13) {
       e.preventDefault();
@@ -96,9 +120,7 @@ $(document).ready(function() {
     var search = $(this).val().toUpperCase();
     var cardArray = retrieveCards();
     var results = cardArray.filter(function(elementCard) {
-      return elementCard.title.toUpperCase().includes(search) ||
-        elementCard.body.toUpperCase().includes(search) ||
-        elementCard.quality.toUpperCase().includes(search);
+      return elementCard.title.toUpperCase().includes(search);
     });
     $('.todo-card-parent').empty();
     for (var i = 0; i < results.length; i++) {
@@ -106,26 +128,36 @@ $(document).ready(function() {
     }
   }
 
+  function articleTemplate(todo, importanceArray) {
+    return (
+      `<article class="todo-card" id="${todo.id}">
+         <h2 class="title-text" contenteditable="true" maxlength="20">${todo.title}</h2>
+         <div class="delete-btn" id="delete">
+         </div>
+         <p class="body-text" contenteditable="true" maxlength="120">${todo.body}</p>
+         <div class="ratings">
+        <div class="upvote-btn" id="upvote"></div>
+      <div class="downvote-btn" id="downvote"></div>
+        <p class="importance">importance: <span class="${todo.id}">${importanceArray[todo.importance]}</span></p>
+      </div>
+      <hr>
+    </article>`
+    )
+  }
+
+  function prependStuff(target, content) {
+    target.prepend(content)
+  }
+
   function addCards(buildCard) {
     var importanceArray = ['none', 'low', 'normal', 'high', 'critical'];
-    $('.todo-card-parent').prepend(
-      `<article class="todo-card" id="${buildCard.id}">
-      <h2 class="title-text" contenteditable="true">${buildCard.title}</h2>
-      <div class="delete-btn" id="delete">
-      </div>
-      <p class="body-text" contenteditable="true">${buildCard.body}</p>
-      <div class="ratings">
-      <div class="upvote-btn" id="upvote"></div>
-      <div class="downvote-btn" id="downvote"></div>
-        <p class="quality">quality: <span class="${buildCard.id}">${importanceArray[buildCard.importance]}</span></p>
-      </div>
-      <p class="clear">Completed</p>
-      <hr>
-    </article>`);
+    var todoHTML = articleTemplate(buildCard, importanceArray)
+    var target = $('.todo-card-parent')
+    prependStuff(target, todoHTML)
   }
 
   function fireCards() {
-    var newCard = new CardElements($('.title-input').val(), $('.body-input').val());
+    var newCard = new CardElements($('.title-input').val(), $('.task-input').val());
     cardArray = retrieveCards();
     cardArray.push(newCard);
     addCards(newCard);
@@ -135,18 +167,16 @@ $(document).ready(function() {
 
   function storeCards(cardArray) {
     localStorage.setItem('array', JSON.stringify(cardArray));
-    clearInputs();
   }
 
   function retrieveCards() {
-    console.log(localStorage.getItem('array'));
     var cardArray = JSON.parse(localStorage.getItem('array')) || [];
     return cardArray;
   }
 
   function clearInputs() {
     $('.title-input').val('');
-    $('.body-input').val('');
+    $('.task-input').val('');
     $('.title-input').focus();
   }
 
