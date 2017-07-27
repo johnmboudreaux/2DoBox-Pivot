@@ -7,28 +7,24 @@ $(document).ready(function() {
     this.importance = importance;
   }
 
-  function eventListeners() {
-    $('.save-btn').on('click', saveButton);
-    $('.title-input').keyup(enableSaveButton);
-    $('.body-input').keyup(enableSaveButton);
-    $('.todo-card-parent').on('click', '#delete', deleteCard);
-    $('.todo-card-parent').on('click', '#downvote', changeImportance);
-    $('.todo-card-parent').on('click', '#upvote', changeImportance);
-    $('.todo-card-parent').on('blur', 'h2', editCardText);
-    $('.todo-card-parent').on('keyup', 'h2', blurEdit);
-    $('.todo-card-parent').on('blur', '.body-text', editCardText);
-    $('.todo-card-parent').on('keyup', '.body-text', blurEdit);
-    $('.search-input').on('keyup', searchCards);
-    // $('.importance-button0').on('click', filterImportance);
-    // $('.importance-button1').on('click', filterImportance);
-    // $('.importance-button2').on('click', filterImportance);
-    // $('.importance-button3').on('click', filterImportance);
-    // $('.importance-button4').on('click', filterImportance);
-
-  }
+  $('.save-btn').on('click', saveButton);
+  $('.title-input').keyup(enableSaveButton);
+  $('.body-input').keyup(enableSaveButton);
+  $('.todo-card-parent').on('click', '#delete', deleteCard);
+  $('.todo-card-parent').on('click', '#downvote', changeImportance);
+  $('.todo-card-parent').on('click', '#upvote', changeImportance);
+  $('.todo-card-parent').on('blur', 'h2', editCardText);
+  $('.todo-card-parent').on('keyup', 'h2', blurEdit);
+  $('.todo-card-parent').on('blur', '.body-text', editCardText);
+  $('.todo-card-parent').on('keyup', '.body-text', blurEdit);
+  $('.search-input').on('keyup', searchCards);
+  $('.importance-button0').on('click', filterImportance);
+  $('.importance-button1').on('click', filterImportance);
+  $('.importance-button2').on('click', filterImportance);
+  $('.importance-button3').on('click', filterImportance);
+  $('.importance-button4').on('click', filterImportance);
 
   retrieveLocalStorage();
-  eventListeners();
 
   function saveButton(event) {
     event.preventDefault();
@@ -57,22 +53,18 @@ $(document).ready(function() {
   function changeImportance(e) {
     e.preventDefault();
     var importanceArray = ['none', 'low', 'normal', 'high', 'critical'];
-    console.log($(this));
     var cardId = $(this).closest('.todo-card')[0].id;
     var cardArray = retrieveCards();
-    console.log(cardArray);
     cardArray.forEach(function(card) {
       if ($(event.target).hasClass('upvote-btn') && card.id == cardId && card.importance < 4) {
         card.importance++;
-        console.log(card.importance);
+        $('.' + cardId).text(importanceArray[card.importance]);
+        storeCards(cardArray);
       } else if ($(event.target).hasClass('downvote-btn') && card.id == cardId && card.importance > 0) {
         card.importance--;
+        $('.' + cardId).text(importanceArray[card.importance]);
+        storeCards(cardArray);
       }
-      console.log(card.importance);
-      console.log(importanceArray);
-      console.log($('.' + cardId).text);
-      $('.' + cardId).text(importanceArray[card.importance]);
-      storeCards(cardArray);
     });
   }
 
@@ -90,14 +82,14 @@ $(document).ready(function() {
     storeCards(cardArray);
   }
 
-  // function filterImportance() {
-  //   console.log($(this));
-  //   var importanceArray = ['none', 'low', 'normal', 'high', 'critical'];
-  //   var cardArray = retrieveCards();
-  //   console.log(cardArray);
-  //
-  //   // go through array by index and find cards that match index of importance
-  // }
+  function filterImportance() {
+    console.log($(this));
+    var importanceArray = ['none', 'low', 'normal', 'high', 'critical'];
+    var cardArray = retrieveCards();
+    console.log(cardArray);
+
+    // go through array by index and find cards that match index of importance
+  }
 
   function blurEdit(e) {
     if (e.keyCode === 13) {
@@ -150,7 +142,6 @@ $(document).ready(function() {
   }
 
   function storeCards(cardArray) {
-    console.log(cardArray);
     localStorage.setItem('array', JSON.stringify(cardArray));
     clearInputs();
   }
