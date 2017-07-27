@@ -132,7 +132,7 @@ header {
 .body-text{
   color: #939598
 }
-.quality {
+.importance {
   color: #6D6E71;
   margin-left: 1.2em;
   display: inline-block;
@@ -150,11 +150,11 @@ hr {
 }
 .upvote-btn,
 .downvote-btn,
-.quality-div,
-.quality{
+.importance-div,
+.importance{
   display: inline-block;
 }
-.quality-div{
+.importance-div{
   margin: 0 0 .25em .75em
 }
 .delete-btn{
